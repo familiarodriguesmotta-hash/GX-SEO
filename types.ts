@@ -1,3 +1,4 @@
+
 export interface SeoMetric {
   name: string;
   score: number;
@@ -10,7 +11,7 @@ export interface AnalysisResult {
   url: string;
   overallScore: number;
   timestamp: string;
-  loadingSpeed: number; // in seconds
+  loadingSpeed: number;
   mobileFriendly: boolean;
   backlinksCount: number;
   metrics: SeoMetric[];
@@ -25,6 +26,14 @@ export interface AIRecommendation {
   description: string;
   codeSnippet?: string;
   impact: 'High' | 'Medium' | 'Low';
+  category?: 'Keyword' | 'Content' | 'Technical' | 'Backlink';
+}
+
+export interface AIToolkitData {
+  keywords: { phrase: string; volume: string; difficulty: number }[];
+  contentIdeas: { title: string; type: string; priority: string }[];
+  competitors: { name: string; gap: string }[];
+  searchInsights?: { source: string; snippet: string; url: string }[];
 }
 
 export enum AppState {
@@ -37,3 +46,5 @@ export enum PlanType {
   FREE = 'FREE',
   PREMIUM = 'PREMIUM',
 }
+
+export type ActiveTab = 'overview' | 'keywords' | 'content' | 'competitors';

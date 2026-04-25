@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
@@ -13,13 +14,12 @@ const App: React.FC = () => {
   const handleAnalyze = useCallback(async (url: string) => {
     setAppState(AppState.ANALYZING);
     try {
-      // Simulate backend processing
       const results = await simulateBackendAnalysis(url);
       setAnalysisData(results);
       setAppState(AppState.DASHBOARD);
     } catch (error) {
       console.error("Analysis failed", error);
-      setAppState(AppState.IDLE); // In real app, show error toast
+      setAppState(AppState.IDLE);
     }
   }, []);
 
@@ -28,13 +28,14 @@ const App: React.FC = () => {
     setAnalysisData(null);
   }, []);
 
-  const handleUpgrade = useCallback(() => {
-    // Simulate Stripe Checkout / Payment Flow
-    const confirmUpgrade = window.confirm("Simulating Stripe Checkout...\n\nConfirm payment of $9.99/mo?");
-    if (confirmUpgrade) {
-      setUserPlan(PlanType.PREMIUM);
-      alert("Upgrade successful! AI Insights unlocked.");
-    }
+  const handleUpgrade = useCallback(async () => {
+    // Simula um delay de processamento de pagamento
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        setUserPlan(PlanType.PREMIUM);
+        resolve();
+      }, 1500);
+    });
   }, []);
 
   return (
